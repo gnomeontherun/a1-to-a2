@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
+    <script src="https://jspm.io/system@0.16.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-alpha.22/angular2.dev.js"></script>
+
   </head>
 
   <body>
@@ -22,70 +26,10 @@
       </div>
     </nav>
 
-    <div class="container" ng-controller="EditorController">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title"><button class="btn btn-primary btn-xs pull-right" ng-click="create()">New</button> My Notes</h3>
-            </div>
-            <div class="panel-body">
-              <p ng-if="!notes.length">No notes</p>
-              <ul class="list-group">
-                <li class="list-group-item" ng-repeat="note in notes" ng-click="view($index)" ng-class="{active: note.id == content.id}">{{note.title}}<br />
-                <small>{{note.date | date:'short'}}</small></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div class="panel panel-default" ng-hide="editing">
-            <div class="panel-heading">
-              <h3 class="panel-title">{{content.title}} <button class="btn btn-primary btn-xs pull-right" ng-click="editing = true">Edit</button></h3>
-            </div>
-            <div class="panel-body" markdown="{{content.content}}"></div>
-            <div class="panel-footer">{{content.date | date:'short'}}</div>
-          </div>
-          <form name="editor" class="panel panel-default" ng-show="editing">
-            <div class="panel-heading">
-              <h3 class="panel-title"><input type="text" class="form-control" ng-model="content.title" placeholder="New Note" required /></h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h3>Editor</h3>
-                  <textarea class="form-control editor" rows="10" ng-model="content.content" placeholder="Note Content" required></textarea>
-                </div>
-                <div class="col-sm-6">
-                  <h3>Preview</h3>
-                  <div class="preview" markdown="{{content.content}}"></div>
-                </div>
-              </div>
-            </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" ng-click="save()" ng-disabled="editor.$invalid">Save</button>
-              <button class="btn btn-danger pull-right" ng-click="remove()" ng-if="content.id">Delete</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <app></app>
 
-    <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/showdown/compressed/showdown.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/editor.js"></script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-58195454-2', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    <script>System.import('app');</script>
 
   </body>
 </html>
